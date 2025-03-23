@@ -13,6 +13,7 @@
 \usepackage{nicefrac}
 \usepackage{mathrsfs}
 \usepackage{tikz}
+\usepackage{authblk}
 
 \usepackage{hyperref}
 
@@ -91,8 +92,27 @@
 
 
 \title{Interpreting Multipartite Entanglement through Topological Summaries}
-\author{Raghav Banka, Matthew Hagan, Nathan Wiebe}
-\date{October 2023}
+\author[1]{Raghav Banka}
+\author[2]{Matthew Hagan}
+\author[1,3,4]{Nathan Wiebe}
+
+\affil[1]{
+University of Toronto, Department of Computer Science, Toronto ON, Canada
+}
+\affil[2]{
+University of Toronto, Department of Physics, Toronto ON, Canada
+}
+\affil[3]{
+Pacific Northwest National Laboratory, Richland WA, USA
+}
+\affil[4]{
+Canadian Institute for Advanced Research, Toronto ON, Canada
+}
+
+
+
+% \date{October 2023}
+
 
 \begin{document}
 
@@ -104,9 +124,17 @@ Entanglement is a hallmark feature of quantum mechanics that allows for correlat
 \textcolor{red}{\textbf{Multipartite entanglement paragraph here.}}
 
 
-Multipartite entanglement on the other hand is very much less studied and there are much more nuanced quantities that can be defined.
+Multipartite entanglement on the other hand is much less studied. In bipartite systems many questions about the entanglement structure of a state is (virtually) completely characterized by the von Neumann entropy. For multipartite systems there are much more nuanced questions that can be asked. For instance, state teleportation in multipartite systems becomes more complicated as there are no clear sources and recipients. You instead need to consider some kind of metric, such as an average or maybe a minimum fidelity across all possible bipartitions that may occur across the many subsystems. In bipartite scenarios we can declare that systems are maximally entangled if either of the reduced density matrices are maximally mixed. Loosely speaking, this tells us that the information stored in the state is across a global correlation, not locally stored in either subsystem. For multipartite states this becomes murkier. Consider the GHZ state $\ket{\rm GHZ} = \frac{1}{\sqrt{2}} \ket{00\ldots0} + \frac{1}{\sqrt{2}} \ket{1 1\ldots1}$. When looking at single subsystem the resulting state is maximally mixed, indicating some kind of global entanglement. However, when looking at a slightly larger subsystem, such as two qubits, the resulting reduced density matrix is $\rho_{1,2} = \frac{1}{2} \ketbra{00}{00} + \frac{1}{2} \ketbra{11}{11}$ which is \emph{not} maximally mixed. Even the $W$ state, characterized as $\ket{\rm W} = \frac{1}{\sqrt{3}}(\ket{100} + \ket{010} + \ket{001})$ has slightly larger von Neumann entropy for any 2 qubit reduced density matrix but many would consider the GHZ state to be more ``globally'' entangled. This raises the question of when can we consider a multipartite pure state to be ``maximally'' entangled? Further, is there even one single meaningful quantity that we can reduce multipartite entanglement to?
 
-In a seemingly unrelated area of research, mathematicians and computer scientists have developed analytical tools based on topology to provide insights into structural characteristics of datasets. These techniques, which fall under the umbrella term of Topological Data Analysis (TDA), gives an overview of how many ``holes" are present in a dataset across varying distance scales. The canonical example is if we have samples of coordinates from a 3-dimensional surface it would be nice to know if the samples come from a sphere compared to a torus. TDA generalizes spheres vs tori to higher dimensions and provides a robust analysis of the number of holes across distance scales to get an idea of what features are persistent in the dataset as opposed to transient noise. Further, TDA provides a single numerical summary of the underlying manifold that data is sampled from to give a topologically invariant quantity to the data, known as the Euler's Characteristic. In graphs this corresponds to the number of edges minus the number of vertices and in three dimensional shapes it is the number of edges minus the number of vertices and minus the number of faces. This gives a quick necessary heuristic to tell if two shapes or graphs are topologically equivalent but is not sufficient to declare they are indeed the same. 
+
+% \begin{align}
+%     {\rm Tr}_C \ketbra{W}{W} &= {\rm Tr}_{C} \frac{1}{3}(\ket{001} + \ket{010} + \ket{100})(\bra{001} + \bra{010} + \bra{100}) \\
+%     &= \frac{1}{3} (\ketbra{00}{00} + \ketbra{01}{01} + \ketbra{01}{10} + \ketbra{10}{01} + \ketbra{10}{10}).
+% \end{align}
+
+
+
+To address these questions we will follow the framework developed by Hamilton and Leditzky \cite{hamilton2023probing} which uses the seemingly unrelated area of research known as Topological Data Analysis (TDA). TDA was developed by mathematicians and computer scientists to provide insights into structural characteristics of datasets that should be independent of small noise when collecting measurements. These techniques give an overview of how many ``holes" are present in a dataset across varying distance scales. The canonical example is if we have samples of coordinates from a 3-dimensional surface it would be nice to know if the samples come from a sphere compared to a torus. TDA generalizes spheres vs tori to higher dimensions and provides a robust analysis of the number of holes across distance scales to get an idea of what features are persistent in the dataset as opposed to transient noise. Further, TDA provides a single numerical summary of the underlying manifold that data is sampled from to give a topologically invariant quantity to the data, known as the Euler's Characteristic. In graphs this corresponds to the number of edges minus the number of vertices and in three dimensional shapes it is the number of edges minus the number of vertices and minus the number of faces. This gives a quick necessary heuristic to tell if two shapes or graphs are topologically equivalent but is not sufficient to declare they are indeed the same. 
 
 Recently Hamilton and Leditzky \cite{hamilton2023probing} showed that TDA serves as a mathematically consistent framework for studying multipartite entanglement. They showed that various entropy functionals, such as the Tsallis $q$-deformed entropy, can be used to build simplicial complexes (higher dimensional analogs of graphs) that can be fed into the TDA pipeline. One of their main results is that the resulting Euler Characteristic is exactly equal to a previously used multipartite entanglement measure known as the $n$-tangle. This not only gives a more mathematically sound justification for the use of the $n$-tangle, which was later championed in \cite{horodecki2024multipartiteentanglement} and specifically the 3-tangle, but because the Euler Characteristic is a blunt summary there remains plenty of useful topological information in the TDA pipeline. 
 
