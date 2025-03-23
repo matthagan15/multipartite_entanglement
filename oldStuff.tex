@@ -1,0 +1,124 @@
+\section{Notes and Results from probing multipartite entanglement through persistent homology paper}
+% \subsection{Multipartite quantum states}
+% \begin{itemize}
+%   \item We define a Finite Dimensional Hilbert Space by  $\mathcal{H}$.
+%   \item Let $A$ be a quantum state. The quantum state $A$ gets defined on $\mathcal{H_A}$. The dimension of the quantum state is given by $|\mathcal{H_A}| = \dim \mathcal{H_A}$
+%   \item For multipartite case $\mathcal{A} := \{ \mathcal{A}_1,...\mathcal{A}_n \}$. We define any multipartite state A on Hilbert space $\mathcal{H}_{A_1, ..., A_n} := \mathcal{H}_{A_1} \otimes ... \otimes \mathcal{H}_{A_n}$. We can simply write $\mathcal{H}_{A_1, ..., A_n}$ as $\mathcal{H}_{A}$.
+%   \item We define the density state $\rho_A$ of quantum system A as the set of positive definite operators on $\mathcal{H}_A$ such that it has unit trace. We are considering both pure and mixed quantum states. 
+%   \item Here we present a more Mathematically precise way of defining density matrix $\rho_A$. The Algebra of linear operator on $\mathcal{H_A}$ is denoted by $\mathcal{B}(\mathcal{H_A})$. The set of positive definite operators is defined by set $\mathcal{P(\mathcal{H_A})} := \{ \rho \in \mathcal{B}(\mathcal{H_A}): \rho \geq 0\}$. The set of density matrices is defined by set $\mathcal{D(\mathcal{H_A})} := \{ \rho \in \mathcal{P}(\mathcal{H_A}): \text{Tr}(\rho) = 1 \}$.
+% \end{itemize}
+\subsection{Entropic Measures}
+\begin{itemize}
+    \item We define Tsallis entropy for quantum state $\rho_A \in \mathcal{D}(\mathcal{H}_A)$ as 
+\begin{equation}
+    S_q(\mathcal{A})_\rho = \frac{1}{1-q}(\text{Tr}\rho_A^q- 1),
+ \end{equation}
+ where $q \in (0, 1) \cup (1, \infty)$
+
+ For $q=2$, the Tsallis entropy reduces to the linear entropy which takes on a very simple form
+\begin{equation}
+    \mathcal{S}_2(\mathcal{A})_\rho = 1 - \text{Tr} \rho_A^2,
+\end{equation}
+ For $ q \rightarrow 1$, the Tsallis entropy reduces to the linear entropy which takes on a very simple form
+\begin{equation}
+    \mathcal{S}_2(\mathcal{A})_\rho = 1 - \text{Tr} \rho_A^2,
+    \end{equation}
+\item We define the mutual information for multiparty systems $\mathcal{A} = \{ \mathcal{A}_1, ...., \mathcal{A}_n \}$. The total correlational as 
+\begin{equation}
+    C(\mathcal{A}_\rho) = \sum^n_{i=1} S(\mathcal{A}_i)\rho - S(\mathcal{A})_\rho = \mathcal{D}(\rho_A \vert \vert \bigotimes^n_{i=1}\rho_{\mathcal{A}_i)}
+\end{equation}
+The Operational Meaning behind this is that it is the the total amount of local noise needed to fully decorrelate a multipartite state 
+\item We use another multipartite entanglement measure Interaction Information
+\begin{equation}
+    I(\mathcal{A}_\rho) = \sum_{J \subseteq A} (-1)^{|J| - 1} S(J)_\rho
+\end{equation}
+\end{itemize}
+\subsection{Persistent Homology}
+\begin{itemize}
+    \item We investigate multiparty quantum system using simplicial topology. We consider each quantum state of the multiparty system to be a vertex of the abstract topological space. We we look at the relation between topological invariant like Euler characteristic and/or Betti Number with entanglement.
+    \item In this paper we utilise Euler's characteristic to relate it with the generalised mutual information. The Euler characteristic is a topological invariant such that it remains constant under bending and stretching of the topological structure. 
+    \item In this paper we utilise the integrated Euler characteristic. We form simplicial complexes based on a function and filtration parameter $\epsilon$. We sum up the Euler characteristic for the simplicial complexes generated from a range of epsilon values. The range of epsilon is from $0$ till the birth time when all the points form a simplex.
+    
+\end{itemize}
+\subsection{Procedure}
+\begin{itemize}
+    \item We define 
+    \begin{equation}
+    C_q(\mathcal{A})_\rho = \sum^n_{i=1} S_q(\mathcal{A}_i)\rho - S_q(\mathcal{A})_\rho = \mathcal{D}(\rho_A \vert \vert \bigotimes^n_{i=1}\rho_{\mathcal{A}_i)}
+\end{equation}
+We use $C_q(\mathcal{A})_\rho$ as functional to generate simplices. We define $\epsilon_{max}$ as the largest value of the filtration parameter at which the number of barcodes changes. 
+ $$\epsilon_{max} = C_q(\mathcal{A})_\rho$$ where  $\mathcal{A} := \{ \mathcal{A}_1,...\mathcal{A}_n \}$.
+ \item Since every face of a simplex is also a simplex, we want that every epsilon the simplicial structure obeys this property. This property is followed when for $\rho \in \mathcal{D}(\mathcal{H}_A)$ and $q \geq 1$. If $I \subseteq J \subseteq A$
+ \begin{equation}
+     C_q(I)_\rho \leq C_q(J)_\rho
+ \end{equation}
+ This monotonicity property is following by multipartite mutual information because of data processing inequality
+ \item We increase the value of $\epsilon$ from 0 to $\epsilon_{max}$. If $C_q(J)_\rho \leq \epsilon$ where $J \subseteq \mathcal{A}$ then the subset $J$ forms a simplex
+\end{itemize}
+\subsection{Results}
+\begin{itemize}
+    \item Let us denote by $\epsilon_{max}$ the largest value of the filtration parameter at which the number
+of barcodes changes, and let $n_k(\epsilon)$ be the number of k-simplices existing at time $\epsilon$. The Euler
+characteristic $\mathfrak{X}(\epsilon)$ for fixed $\epsilon$ can be expressed in terms of the $n_k$ as 
+\begin{equation}
+    \mathfrak{X}(\epsilon) = \sum^{\infty}_{k=0} (-1)^kn_k(\epsilon)
+\end{equation}
+\item We define the Integrated Euler Characteristic(IEC) as $\mathfrak{X}(\epsilon_{max})$
+\begin{equation}
+    \mathfrak{X}(\epsilon_{max}) = \int_{0}^{\epsilon_{max}} \sum^{\infty}_{k=0} (-1)^k n_k(\epsilon)d\epsilon
+\end{equation}
+We find that 
+\begin{equation}
+    \mathfrak{X}(\epsilon_{max}) = \epsilon_{max} + \sum_{J \subseteq A} (-1)^{|J| - 1} S(J)_\rho
+\end{equation}
+We omit one of the 0-simplices while calculating the euler characteristic 
+\begin{equation}
+    \tilde{\mathfrak{X}}(\infty) = \sum_{J \subseteq A} (-1)^{|J| - 1} S(J)_\rho = I_q(\mathcal{A})_\rho
+\end{equation}
+We also find that 
+\begin{equation}
+    I_q(J)_\rho = - \sum_{K \leq J} (-1)^{|K|} C_q(K)_\rho
+\end{equation}
+\begin{equation}
+    C_q(J)_\rho =  \sum_{K \leq J} (-1)^{|K|} I_q(K)_\rho
+\end{equation}
+\item We also find that 
+\begin{equation}
+    \tilde{\mathfrak{X}}(\infty) = I_2(\mathcal{A})_\rho = Q^2_{(n)} = \mathcal{T}_n(\rho)
+\end{equation}
+where $Q^2_{(n)}$ is the Minkowski
+length of the generalized Bloch vector and $\mathcal{T}_n(\rho)$ is the n-tangle 
+
+\end{itemize}
+\section{Discussion}
+
+\subsection{LOCC + Resource Theory}
+Given a system with, say, a 1-cycle, it has a birth and death time as a contributor to the first Betti number. We want to know:
+\begin{itemize}
+    \item If I apply an LOCC channel to simplices within the cycle, is the death time minus the birth time monotonically increasing?
+    \item Vice versa, if I apply an LOCC channel to simplices outside of the cycle, is the death time minus the birth time monotonically decreasing?
+\end{itemize}
+Another question is given changes in integrated Betti numbers, can we say anything concrete about the channel applied? If $\int \beta_i$ is the prior Betti number and $\int \Phi (\beta_i)$, what are the properties of $\Phi$ if one is larger than the other?
+
+We want to show that homological properties of multipartite entangled states are a resource under LOCC \cite{RevModPhys.91.025001}. In quantum resource theory we consider entanglement as a resource to "spend" to perform certain "privileged" transformation. We can use LOCC to transform a quantum of high entanglement to a quantum state of low entanglement. However, we can't do the opposite(ie low entanglement to high entanglement). We want to know
+\begin{itemize}
+    \item If there are topological properties of the simplicial structure that can act as a resources of entanglement that reduces with LOCC.
+\end{itemize}
+
+%  The homologies we will study are clique homologies given by the two-qubit distance function $d_{\rho}(A,B) = 4 \trace{\partrace{A,B}{\rho}^2} $
+
+Distance metric:
+\begin{equation}
+    D_2(J; \rho) \coloneqq 
+    C_2(\mathcal{A})_\rho = \sum^n_{i=1} S_2(\mathcal{A}_i)\rho - S_2(\mathcal{A})_\rho
+\end{equation}
+\subsection{Changing Distance Metric}
+With the current distance metric or functional to generate simplicial we are placing maximally correlated points maximally far apart in the euclidean space. The formation of holes occurs because of entanglement between points. For example the bell state will have 2 points at distance 1 if $q=2$ in $C_q(\mathcal{A})_\rho$. Compared to separable states where points are placed on top of each other. This was very counter-intuitive. We think it might lead to interesting results with such a distance metric. Holes in Topology typically identifies discrepancy in simplicial structures. However, Holes in our case are caused as the result of entanglement.
+\begin{itemize}
+    \item We thought of introducing a different distance measure between two points. Lets call it $\mathcal{D}_\alpha(a,b)$ where a and b are points in the topological space. A n-simplex is formed when there is a connection between the n+1 points of the simplex. A connection between points are formed when $\mathcal{D}_\alpha(a,b) \leq \epsilon$.
+    \begin{equation}
+        \mathcal{D}_\alpha(a,b) = D_a D_b \text{Tr}(\rho^2_{ab}) - \frac{\text{Tr}(\rho^2_{ab})}{\text{Tr}(\rho^2_{a}) \cdot \text{Tr}(\rho^2_{b}) }
+    \end{equation}
+    where $D_a$ and $D_b$ are dimensions of quantum state represented by the point a and b in the topological space. 
+    \item We want to extend our idea of the resource theory. Earlier we were using metric defined in \cite{hamilton2023probing}. However, now we want to see if we can change the metric is some way such that a topological properties follows the resource theory.
+\end{itemize}
